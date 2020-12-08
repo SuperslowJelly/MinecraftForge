@@ -37,6 +37,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.FMLContainer;
@@ -168,7 +169,8 @@ public class FMLNetworkHandler
             }
             String rejectString = String.join("\n", rejectStrings);
             FMLLog.log.info("Rejecting connection {}: {}", side, rejectString);
-            return String.format("Server Mod rejections:\n%s", rejectString);
+            //return String.format("Server Mod rejections:\n%s", rejectString); // NOTE: Original code.
+            return String.format("You are running the wrong version of the modpack!\nRequired version: %1$s\nJoin discord.gg/ComplexFTB if you need help!\n\nServer Mod rejections:\n%2$s", ForgeModContainer.modpackVersion, rejectString);
         }
     }
 

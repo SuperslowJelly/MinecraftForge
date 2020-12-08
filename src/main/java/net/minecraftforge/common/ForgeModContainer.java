@@ -115,6 +115,7 @@ public class ForgeModContainer extends DummyModContainer implements WorldAccessC
     public static float zombieBabyChance = 0.05f;
     public static boolean shouldSortRecipies = true;
     public static boolean disableVersionCheck = false;
+    public static String modpackVersion = "0.0";
     public static boolean forgeLightPipelineEnabled = true;
     public static boolean selectiveResourceReloadEnabled = false;
     @Deprecated // TODO remove in 1.13
@@ -226,6 +227,13 @@ public class ForgeModContainer extends DummyModContainer implements WorldAccessC
         // remap properties wrongly listed as general properties to client properties
         remapGeneralPropertyToClient("biomeSkyBlendRange");
         remapGeneralPropertyToClient("forgeLightPipelineEnabled");
+
+        // NOTE: Modpack version addition
+        prop = config.get(CATEGORY_GENERAL, "modpackVersion", "0.0");
+        prop.setComment("Set to match current modpack version. Used when disconnecting users for mod version mismatches.");
+        prop.setLanguageKey("forge.configgui.modpackVersion");
+        modpackVersion = prop.getString();
+        propOrder.add(prop.getName());
 
         prop = config.get(CATEGORY_GENERAL, "disableVersionCheck", false);
         prop.setComment("Set to true to disable Forge's version check mechanics. Forge queries a small json file on our server for version information. For more details see the ForgeVersion class in our github.");
